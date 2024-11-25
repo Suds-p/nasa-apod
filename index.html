@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/58c6321104.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./lib/mc-calendar.min.css">
+    <script type="module" src="./lib/mc-calendar.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <title>NASA Picture of the Day</title>
+</head>
+<body>
+    <div class="body-wrapper">
+        <main>
+            <header>
+                <h1>NASA Photo of The Day</h1>
+            </header>
+            <section>
+                <div id="loading">
+                    <h3>Loading...</h3>
+                    <div class="loader"></div>
+                </div>
+                <div class="wrapper hide">
+                    <img id="img-content" class="media" src="https://placehold.co/1000x800" alt="photo of the day">
+                    <iframe id="vid-content" class="media" src="#" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <section id="nav-btns">
+                        <nav id="left-btn">
+                            <i class="fa-solid fa-circle-left"></i>
+                            <span>Previous Day</span>
+                        </nav>
+                        <nav id="right-btn">
+                            <i class="fa-solid fa-circle-right"></i>
+                            <span>Next Day</span>
+                        </nav>
+                    </section>
+                    <section class="title-wrapper">
+                        <input id="current-date" type="text">
+                        <section class="fav-wrapper">
+                            <h2 id="title">Interplanetary Earth</h2>
+                            <i id="fav-btn" class="fa-regular fa-heart"></i>
+                            <i id="unfav-btn" class="fa-solid fa-heart fav hide"></i>
+                        </section>
+                    </section>
+                    
+                    <p id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus elementum mauris ut velit lacinia scelerisque. Donec euismod auctor lacus, quis ultrices ligula ultricies eget. Sed at nisi metus. Proin sagittis, erat convallis commodo mollis, mauris massa ultrices lacus, sit amet consectetur quam nunc luctus elit. Duis feugiat, tortor sed eleifend varius, tellus leo luctus lorem, eget facilisis turpis orci vel massa. Aliquam elementum elit vitae dolor consequat consequat. Nulla volutpat orci nec sem semper aliquam. Pellentesque tincidunt, lectus ut tincidunt gravida, ex ante posuere metus, sit amet pretium odio sem eu nunc. Nunc et ligula elementum, lacinia tellus non, luctus arcu. Nulla in mi in risus eleifend hendrerit ut ac mi.</p>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <span>Designed by Sudeshna P &copy; 2024</span>
+        </footer>
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>

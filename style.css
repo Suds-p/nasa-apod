@@ -1,0 +1,358 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Avenir, sans-serif;
+}
+
+/*
+* Gradient created with https://www.css-gradient.com 
+*/
+html {
+    background: #0b0f32;
+    background: radial-gradient(at 85% 100%, #4a1734, transparent 42%), 
+                radial-gradient(ellipse at left top, #01405f, #0b0f32 59%);
+    /* background-image: url(bg.jpg); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left top;
+}
+
+header {
+    padding: 20px 0;
+}
+
+nav {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    transition: background 0.2s;
+    padding: 20px 0;
+}
+
+nav:hover {
+    background: #0008;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+#nav-btns {
+    display: flex;
+    width: 100%;
+    pointer-events: none;
+}
+
+#left-btn {
+    border-radius: 25px 0 0 25px;
+    pointer-events: all;
+}
+#right-btn {
+    border-radius: 0 25px 25px 0;
+    pointer-events: all;
+}
+
+main {
+    display: flex;
+    flex-grow: 1;
+    max-height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: auto;
+}
+
+main > section {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 0 80px;
+}
+
+.body-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#loading {
+    display: flex;
+    flex-grow: 2;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+/* CSS Loader from https://css-loaders.com/dots/ */
+.loader {
+    width: 60px;
+    aspect-ratio: 4;
+    --_g: no-repeat radial-gradient(circle closest-side,#fff 90%,#fff0);
+    background: 
+        var(--_g) 0%   50%,
+        var(--_g) 50%  50%,
+        var(--_g) 100% 50%;
+    background-size: calc(100%/3) 100%;
+    animation: l7 1s infinite linear;
+    }
+    @keyframes l7 {
+        33%{background-size:calc(100%/3) 0%  ,calc(100%/3) 100%,calc(100%/3) 100%}
+        50%{background-size:calc(100%/3) 100%,calc(100%/3) 0%  ,calc(100%/3) 100%}
+        66%{background-size:calc(100%/3) 100%,calc(100%/3) 100%,calc(100%/3) 0%  }
+}
+
+.title-wrapper {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    text-align: center;
+}
+
+.fav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.wrapper {
+    padding: 25px 0;
+    max-width: 800px;
+    display: flex;
+    flex: 5;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.wrapper #img-content, .media {
+    border-radius: 25px;
+    border: 3px solid white;
+    width: 100%;
+    max-width: 800px;
+}
+
+#vid-content {
+    display: none;
+    aspect-ratio: 16/9;
+}
+
+footer {
+    display: flex;
+    flex-basis: 40px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    background: #080416;
+}
+
+.hide {
+    display: none;
+}
+
+#left-btn.disabled, #right-btn.disabled {
+    pointer-events: none;
+    color: dimgray;
+}
+
+/****************
+    TYPOGRAPHY
+****************/
+
+html {
+    font-size: 10px;
+    color: #eee;
+}
+
+main h1 {
+    font-weight: 900;
+    font-size: 4.5rem;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+#loading h3 {
+    font-size: 2.5rem;
+    color: #acdcf3;
+}
+
+nav i {
+    font-size: 2rem;
+}
+
+nav span {
+    font-size: 1.3rem;
+}
+
+p {
+    font-size: 1.5rem;
+}
+
+#current-date {
+    background: white;
+    color: black;
+    padding: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.title-wrapper i {
+    font-size: 2rem;
+}
+
+#fav-btn:hover, #unfav-btn:hover {
+    cursor: pointer;
+}
+
+.title-wrapper #unfav-btn {
+    color: red;
+}
+
+/*******************
+    MEDIA QUERIES
+********************/
+
+@media all and (min-width: 901px) {
+    #left-btn, #right-btn {
+        border-radius: 0;
+        width: 15%;
+    }
+
+    #nav-btns {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        justify-content: space-between;
+    }
+
+    #nav-btns > nav {
+        flex: none;
+    }
+
+    nav i {
+        font-size: 2.7rem;
+    }
+
+    .wrapper {
+        padding: 25px 0;
+    }
+}
+
+@media all and (min-width: 1000px) {
+    #left-btn, #right-btn {
+        width: 17%;
+    }
+
+    nav i {
+        font-size: 3rem;
+    }
+    
+    nav span {
+        font-size: 1.6rem;
+    }
+
+    .wrapper {
+        padding: 25px 0;
+    }
+}
+
+@media all and (max-width: 1250px) {
+    .wrapper {
+        padding: 25px 80px;
+    }
+}
+
+@media all and (max-width: 900px) {
+    #nav-btns {
+        position: static;
+    }
+
+    .wrapper {
+        flex: 3;
+        padding: 0;
+    }
+
+    main > section {
+        padding: 5%;
+    }
+}
+
+@media all and (max-width: 760px) {
+    .title-wrapper {
+        flex-direction: column;
+    }
+
+    #current-date {
+        width: 100%;
+    }
+}
+
+@media all and (max-width: 650px) {
+    main h1 {
+        font-size: 3.8rem;
+    }
+
+    .title-wrapper span {
+        font-size: 1.4rem;
+        text-wrap: nowrap;
+    }
+}
+
+@media all and (max-width: 550px) {
+    main h1 {
+        font-size: 3rem;
+    }
+}
+
+@media all and (max-width: 350px) {
+    main h1 {
+        font-size: 2.3rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+
+    nav {
+        padding: 10px 0;
+    }
+}
+
+/**********************************
+*   Modifications to MCDatePicker
+***********************************/
+.mc-date--marked {
+    position: relative;
+    color: #ffffff;
+    z-index: 1
+}
+
+td.mc-date.mc-date--marked::after {
+    position: absolute;
+    top: 9px;
+    left: 6px;
+    height: 25px;
+    z-index: -1;
+    aspect-ratio: 1;
+    
+    content: '';
+    --_m: radial-gradient(#000 69%,#0000 70%) 84.5%/50%;
+    -webkit-mask-box-image: var(--_m);
+    clip-path: polygon(-41% 0,50% 91%, 141% 0);
+    background: #f0afb4;
+    aspect-ratio: 1;
+}
+
+td.mc-date.mc-date--inactive.mc-date--marked::after {
+    background: lightgray;
+}
