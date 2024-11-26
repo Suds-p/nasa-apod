@@ -50,7 +50,7 @@ getNASAData();
 
 function getNASAData() {
     console.log(currentDate);
-    fetch(`https://suds-apod.netlify.app/.netlify/functions/getNasaData?date=${currentDate}`)
+    fetch(`/.netlify/functions/getNasaData?date=${currentDate}`)
         .then(resp => resp.json())
         .then(data => {
             console.log(data);
@@ -79,6 +79,7 @@ function loadContentOnPage(containerId, data) {
     document.getElementById("title").innerText = title;
     document.getElementById("description").innerText = desc;
     document.getElementById("current-date").value = getReadableDate(new Date(currentDate + "T00:00:00"));
+    datePicker.pickedDate = new Date(currentDate + "T00:00:00");
 
     updateNavButtonStatus();
     updateFavButtonStatus();
