@@ -49,7 +49,8 @@ datePicker.markDatesCustom(date => {
 getNASAData();
 
 function getNASAData() {
-    fetch(`https://api.nasa.gov/planetary/apod?date=${currentDate}&api_key=${API_KEY}`)
+    console.log(currentDate);
+    fetch(`https://suds-apod.netlify.app/.netlify/functions/getNasaData?date=${currentDate}`)
         .then(resp => resp.json())
         .then(data => {
             console.log(data);
@@ -106,16 +107,18 @@ function goToNextDay() {
 
 function addFavorite() {
     // Pull current list from local storage
-    let currentFavs = localStorage.getItem(FAV_DATES);
+    let currentFavs = localStorage.getItem(FAV_DATES) ? localStorage.getItem(FAV_DATES) : '';
+    let favDates = currentFavs.split(', ');
+    let favIndex = favDates.indexOf(currentDate);
 
-    // Set to current if no list available, or add to the end
+    // Add date if it doesn't already exist
     if (!currentFavs) {
-        currentFavs = currentDate;
+        favDates = [currentDate];
     }
-    else if (currentFavs.search(currentDate) === -1) {
-        currentFavs += ", " + currentDate;
+    else if (favIndex === -1) {
+        favDates.push(currentDate)
     }
-    localStorage.setItem(FAV_DATES, currentFavs);
+    localStorage.setItem(FAV_DATES, favDates.join(', '));
     updateFavButtonStatus();
 }
 
@@ -127,7 +130,7 @@ function removeFavorite() {
     if (favIndex !== -1) {
         favIndex === 0 ? favDates.shift() : favDates.splice(favIndex, favIndex);
         currentFavs = favDates.join(', ');
-        localStorage.setItem(FAV_DATES, favDates);
+        localStorage.setItem(FAV_DATES, currentFavs);
     }
     updateFavButtonStatus();
 }
