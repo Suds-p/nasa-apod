@@ -6,8 +6,7 @@ const handler = async (event) => {
     }
     
     const currentDate = event.queryStringParameters.date || '';
-    const dateParam = currentDate ? `date=${currentDate}&` : '';
-    const data = await fetch(`https://api.nasa.gov/planetary/apod?${dateParam}api_key=${process.env.API_KEY}`)
+    const data = await fetch(`https://api.nasa.gov/planetary/apod?date=${currentDate}api_key=${process.env.API_KEY}`)
       .then(resp => resp.json());
       return {
         statusCode: 200,
