@@ -45,13 +45,21 @@ nav:hover {
     pointer-events: none;
 }
 
+#left-btn, #right-btn {
+    pointer-events: all;
+    position: relative;
+    overflow: hidden;
+}
+
+#left-btn i, #left-btn span:first-of-type {
+    z-index: 5;
+}
+
 #left-btn {
     border-radius: 25px 0 0 25px;
-    pointer-events: all;
 }
 #right-btn {
     border-radius: 0 25px 25px 0;
-    pointer-events: all;
 }
 
 main {
@@ -325,6 +333,25 @@ p {
 
     nav {
         padding: 10px 0;
+    }
+}
+
+/***********************
+*   Animation styles   *
+************************/
+span.ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 600ms linear;
+    background-color: #fff6;
+    z-index: 2;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
     }
 }
 
