@@ -13,7 +13,7 @@ document.getElementById("unfav-btn").onclick = removeFavorite;
 let currentDate = localStorage.getItem(CURRENT_DATE);
 console.log(currentDate);
 if (!currentDate) {
-    currentDate = getOnlyDate(new Date())
+    currentDate = getOnlyDate(getTodayDate());
     localStorage.setItem(CURRENT_DATE, currentDate);
 }
 
@@ -28,7 +28,7 @@ const datePicker = MCDatepicker.create({
     closeOnBlur: true,
     customClearBTN: '',
     dateFormat: 'MMM DD, YYYY',
-    maxDate: new Date(),
+    maxDate: getTodayDate(),
     selectedDate: new Date(currentDate + "T00:00:00"),
     theme: {
         theme_color: '#4a1734'
@@ -163,6 +163,12 @@ function getOnlyDate(date) {
     return date.toISOString().substring(0, 10);
 }
 
+function getTodayDate() {
+    let date = new Date();
+    const timezoneOffset = date.getTimezoneOffset() * 60000;
+    return new Date(date.valueOf() - timezoneOffset);
+}
+
 function getReadableDate(date) {
     let baseDateStr = date.toDateString().substring(4);
     return baseDateStr.substring(0, 6) + ", " + baseDateStr.substring(7)
@@ -177,7 +183,7 @@ function enableButton(buttonId) {
 }
 
 function updateNavButtonStatus() {
-    if (currentDate === getOnlyDate(new Date())) {
+    if (currentDate === getOnlyDate(getTodayDate())) {
         disableButton("right-btn");
     }
     else {
