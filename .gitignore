@@ -62,5 +62,10 @@ web_modules/
 
 # Mac files
 .DS_Store
+
+# Security keys
+*.pem
+
 # Local Netlify folder
 .netlify
+netlify.toml

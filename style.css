@@ -141,16 +141,53 @@ main > section {
     gap: 20px;
 }
 
-.wrapper #img-content, .media {
+.wrapper #img-content, .media, #not-found-wrapper img {
     border-radius: 25px;
-    border: 3px solid white;
     width: 100%;
     max-width: 800px;
 }
+.wrapper #img-content, .media{
+    border: 3px solid white;
+}
+
 
 #vid-content {
     display: none;
     aspect-ratio: 16/9;
+}
+
+#not-found-wrapper {
+    position: relative;
+}
+#not-found-wrapper img {
+    filter: brightness(0.5);
+}
+#not-found-wrapper::before {
+    content: "Designed by Freepik";
+    font-size: 0.8rem;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    color: teal;
+    z-index: 10;
+    font-style: italic;
+}
+#not-found-wrapper::after {
+    content: "Sorry, no image found here!";
+    font-size: 4rem;
+    font-weight: 900;
+    position: absolute;
+    top: 40%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
 }
 
 footer {

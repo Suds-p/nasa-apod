@@ -63,36 +63,59 @@ function getNASAData() {
     fetch(`/.netlify/functions/getNasaData?date=${currentDate}`)
         .then(resp => resp.json())
         .then(data => {
-            console.log(data);
-
             // Hide loader when data comes and show main content
             hideLoader();
 
             // Show media containers based on content received
-            if (data.media_type === "image") {
-                hideContentOnPage("vid-content");
-                loadContentOnPage("img-content", data);
-            }
-            else {
+            if (data.media_type === "video") {
                 hideContentOnPage("img-content");
                 loadContentOnPage("vid-content", data);
+            }
+            else {
+                hideContentOnPage("vid-content");
+                loadContentOnPage("img-content", data);
             }
         });
 }
 
-function loadContentOnPage(containerId, data) {
-    // Extract data
-    const {url, title, explanation: desc} = data;
-
-    document.getElementById(containerId).style.display = "block";
-    document.getElementById(containerId).src = url;
-    document.getElementById("title").innerText = title;
-    document.getElementById("description").innerText = desc;
-    document.getElementById("current-date").value = getReadableDate(new Date(currentDate + "T00:00:00"));
-    datePicker.pickedDate = new Date(currentDate + "T00:00:00");
-
+function loadContentOnPage(mediaContainerId, data) {
     updateNavButtonStatus();
     updateFavButtonStatus();
+    
+    // Extract data
+    const {code=200, url, title, explanation: desc} = data;
+    console.log(data);
+
+    if (code >= 400 || !url) {
+        console.log("showing not found screen.....");
+        showNotFoundScreen();
+
+        if (!desc) {
+            document.getElementById("description").classList.add("hide");
+            document.getElementById("title").innerText = 'Please pick another date!';
+            document.querySelectorAll(".fav-wrapper i").forEach(i => i.classList.add("hide"));
+        }
+        else {
+            document.getElementById("description").classList.remove("hide");
+            document.querySelector(".fav-wrapper").classList.remove("hide");
+            document.getElementById("title").innerText = title;
+            document.getElementById("description").innerText = desc;
+            document.getElementById("current-date").value = getReadableDate(new Date(currentDate + "T00:00:00"));
+            datePicker.pickedDate = new Date(currentDate + "T00:00:00");
+        }
+    }
+    else {
+        hideNotFoundScreen();
+        document.getElementById("description").classList.remove("hide");
+        document.querySelector(".fav-wrapper").classList.remove("hide");
+        document.getElementById(mediaContainerId).classList.remove("hide");
+
+        document.getElementById(mediaContainerId).src = url;
+        document.getElementById("title").innerText = title;
+        document.getElementById("description").innerText = desc;
+        document.getElementById("current-date").value = getReadableDate(new Date(currentDate + "T00:00:00"));
+        datePicker.pickedDate = new Date(currentDate + "T00:00:00");
+    }
 }
 
 // --------- Listener functions ---------
@@ -167,6 +190,19 @@ function showLoader() {
 function hideLoader() {
     document.getElementById("loading").style.display = "none";
     document.querySelector(".wrapper").classList.remove("hide");
+}
+
+function showNotFoundScreen() {
+    document.getElementById("not-found-wrapper").classList.remove("hide");
+    document.querySelector("#not-found-wrapper img").src = "./not-found.jpg";
+    document.getElementById("img-content").classList.add("hide");
+    document.getElementById("vid-content").classList.add("hide");
+}
+
+function hideNotFoundScreen() {
+    document.getElementById("not-found-wrapper").classList.add("hide");
+    document.getElementById("img-content").classList.remove("hide");
+    document.getElementById("vid-content").classList.remove("hide");
 }
 
 function getDateString(date) {
