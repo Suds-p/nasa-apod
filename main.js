@@ -4,6 +4,14 @@ const FAV_DATES = "favDates";
 const API_KEY = '';
 let datePickerOpen = false;
 
+// Register PWA service worker
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+    .register("/sw.js")
+    .then(() => console.log("Service Worker registered"))
+    .catch(error => console.error("Service Worker registration failed:", error));
+}
+
 // Set up listeners
 document.getElementById("left-btn").onclick = goToPrevDay;
 document.getElementById("right-btn").onclick = goToNextDay;

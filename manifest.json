@@ -1,0 +1,8 @@
+{
+    "name": "NASA APOD App",
+    "short-name": "NASA APOD",
+    "start_url": "index.html",
+    "display":"standalone",
+    "background_color":"#080416",
+    "theme_color":"black"
+}
