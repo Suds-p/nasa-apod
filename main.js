@@ -10,12 +10,8 @@ document.getElementById("fav-btn").onclick = addFavorite;
 document.getElementById("unfav-btn").onclick = removeFavorite;
 
 // Check localstorage for existing date
-let currentDate = localStorage.getItem(CURRENT_DATE);
-console.log(currentDate);
-if (!currentDate) {
-    currentDate = getOnlyDate(getTodayDate());
-    localStorage.setItem(CURRENT_DATE, currentDate);
-}
+let currentDate = getOnlyDate(getTodayDate());
+localStorage.setItem(CURRENT_DATE, currentDate);
 
 // If it's today, disable the Next Day button
 updateNavButtonStatus();
