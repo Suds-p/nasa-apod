@@ -2,26 +2,30 @@
 const CURRENT_DATE = "currentDate";
 const FAV_DATES = "favDates";
 const API_KEY = '';
+let datePickerOpen = false;
 
 // Set up listeners
 document.getElementById("left-btn").onclick = goToPrevDay;
 document.getElementById("right-btn").onclick = goToNextDay;
 document.getElementById("fav-btn").onclick = addFavorite;
 document.getElementById("unfav-btn").onclick = removeFavorite;
+document.getElementById("current-date").onclick = () => {
+    (datePickerOpen) ? datePicker.close() : datePicker.open();
+    datePickerOpen = !datePickerOpen;
+}
 
 // Check localstorage for existing date
-let currentDate = getOnlyDate(getTodayDate());
+let currentDate = getDateString(getTodayDate());
 localStorage.setItem(CURRENT_DATE, currentDate);
 
 // If it's today, disable the Next Day button
 updateNavButtonStatus();
 
-// Date picker?
+// Date picker
 const datePicker = MCDatepicker.create({
     el: '#current-date',
     autoClose: true,
     bodyType: 'inline',
-    closeOnBlur: true,
     customClearBTN: '',
     dateFormat: 'MMM DD, YYYY',
     maxDate: getTodayDate(),
@@ -31,15 +35,17 @@ const datePicker = MCDatepicker.create({
     }
   });
 
-datePicker.onSelect((date, _) => {
-    currentDate = getOnlyDate(date);
-    localStorage.setItem(CURRENT_DATE, currentDate);
-    showLoader();
-    getNASAData();
+datePicker.onSelect((selectedDate, _) => {
+    if (currentDate !== getDateString(selectedDate)) {
+        currentDate = getDateString(selectedDate);
+        localStorage.setItem(CURRENT_DATE, currentDate);
+        showLoader();
+        getNASAData();
+    }
 });
 datePicker.markDatesCustom(date => {
     const favDates = (localStorage.getItem(FAV_DATES) ? localStorage.getItem(FAV_DATES) : '').split(', ');
-    return favDates.indexOf(getOnlyDate(date)) !== -1;
+    return favDates.indexOf(getDateString(date)) !== -1;
 });
 
 getNASAData();
@@ -87,7 +93,7 @@ function goToPrevDay(event) {
     .then(() => {
         currentDate = new Date(currentDate);
         currentDate.setDate(currentDate.getDate() - 1);
-        currentDate = getOnlyDate(currentDate);
+        currentDate = getDateString(currentDate);
         localStorage.setItem(CURRENT_DATE, currentDate);
         updateNavButtonStatus();
         showLoader();
@@ -101,7 +107,7 @@ function goToNextDay(event) {
     .then(() => {
         currentDate = new Date(currentDate);
         currentDate.setDate(currentDate.getDate() + 1);
-        currentDate = getOnlyDate(currentDate);
+        currentDate = getDateString(currentDate);
         localStorage.setItem(CURRENT_DATE, currentDate);
         updateNavButtonStatus();
         showLoader();
@@ -155,7 +161,7 @@ function hideLoader() {
     document.querySelector(".wrapper").classList.remove("hide");
 }
 
-function getOnlyDate(date) {
+function getDateString(date) {
     return date.toISOString().substring(0, 10);
 }
 
@@ -179,7 +185,7 @@ function enableButton(buttonId) {
 }
 
 function updateNavButtonStatus() {
-    if (currentDate === getOnlyDate(getTodayDate())) {
+    if (currentDate === getDateString(getTodayDate())) {
         disableButton("right-btn");
     }
     else {
