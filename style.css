@@ -115,13 +115,15 @@ main > section {
     width: 100%;
     gap: 25px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     text-align: center;
 }
 
 .fav-wrapper {
+    flex: 1;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
 }
 
@@ -204,10 +206,9 @@ p {
 }
 
 #current-date {
-    flex: 1;
     background: white;
     color: black;
-    padding: 10px;
+    padding: 10px 25px;
     font-size: 1.5rem;
     font-weight: bold;
     border-radius: 8px;
