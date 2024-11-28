@@ -18,6 +18,10 @@ html {
     background-position: left top;
 }
 
+body {
+    overflow: hidden;
+}
+
 header {
     padding: 20px 0;
 }
@@ -68,7 +72,7 @@ main {
     max-height: 100%;
     flex-direction: column;
     justify-content: space-between;
-    overflow: auto;
+    overflow-y: scroll;
 }
 
 main > section {
@@ -81,7 +85,7 @@ main > section {
 .body-wrapper {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100dvh;
 }
 
 #loading {
