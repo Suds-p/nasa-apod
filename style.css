@@ -141,7 +141,7 @@ main > section {
     gap: 20px;
 }
 
-.wrapper #img-content, .media, #not-found-wrapper img {
+.wrapper #img-content, .media, .media-wrapper, #not-found-wrapper img {
     border-radius: 25px;
     width: 100%;
     max-width: 800px;
@@ -404,6 +404,36 @@ span.ripple {
     to {
         transform: scale(4);
         opacity: 0;
+    }
+}
+
+.fadeout-anim {
+    --t: 300ms;
+    animation: fadeout var(--t) linear;
+    animation-fill-mode: forwards;
+}
+
+.fadein-anim {
+    --t: 300ms;
+    animation: fadein var(--t) linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeout {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }
 

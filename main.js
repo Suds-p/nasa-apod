@@ -47,8 +47,12 @@ datePicker.onSelect((selectedDate, _) => {
     if (currentDate !== getDateString(selectedDate)) {
         currentDate = getDateString(selectedDate);
         localStorage.setItem(CURRENT_DATE, currentDate);
-        showLoader();
-        getNASAData();
+        fadeOutPageAnimation()
+        .then(() => {
+            showLoader();
+            return getNASAData();
+        })
+        .then(() => fadeInPageAnimation());
     }
 });
 datePicker.markDatesCustom(date => {
@@ -60,7 +64,7 @@ getNASAData();
 
 function getNASAData() {
     console.log(currentDate);
-    fetch(`/.netlify/functions/getNasaData?date=${currentDate}`)
+    return fetch(`/.netlify/functions/getNasaData?date=${currentDate}`)
         .then(resp => resp.json())
         .then(data => {
             // Hide loader when data comes and show main content
@@ -122,7 +126,7 @@ function loadContentOnPage(mediaContainerId, data) {
 
 // --------- Listener functions ---------
 function goToPrevDay(event) {
-    createRipple(event)
+    Promise.all([fadeOutPageAnimation(event), createRipple(event)])
     .then(() => {
         currentDate = new Date(currentDate);
         currentDate.setDate(currentDate.getDate() - 1);
@@ -130,13 +134,14 @@ function goToPrevDay(event) {
         localStorage.setItem(CURRENT_DATE, currentDate);
         updateNavButtonStatus();
         showLoader();
-        getNASAData();
-    });
+        return getNASAData();
+    })
+    .then(() => fadeInPageAnimation(event));
 }
 
 function goToNextDay(event) {
     // Handle animation
-    createRipple(event)
+    Promise.all([fadeOutPageAnimation(event), createRipple(event)])
     .then(() => {
         currentDate = new Date(currentDate);
         currentDate.setDate(currentDate.getDate() + 1);
@@ -144,8 +149,9 @@ function goToNextDay(event) {
         localStorage.setItem(CURRENT_DATE, currentDate);
         updateNavButtonStatus();
         showLoader();
-        getNASAData();
-    });
+        return getNASAData();
+    })
+    .then(() => fadeInPageAnimation(event));
 }
 
 function addFavorite() {
@@ -270,6 +276,43 @@ function createRipple(event) {
         setTimeout(() => {
             circle.remove();
             res();
-        }, 570);
+        }, 600);
     })
+}
+
+
+function fadeOutPageAnimation(event) {
+    if (event) {
+        event.preventDefault();
+    }
+    
+    document.querySelectorAll(".animate").forEach(w => w.classList.remove("fadein-anim"));
+    document.querySelectorAll(".animate").forEach(w => w.classList.remove("fadeout-anim"));
+
+    const pageAnimationPromise = new Promise((res) => {
+        document.querySelectorAll(".animate").forEach(w => w.classList.add("fadeout-anim"));
+        setTimeout(() => {
+            res();
+        }, 300);
+    })
+
+    return pageAnimationPromise;
+}
+
+function fadeInPageAnimation(event) {
+    if (event) {
+        event.preventDefault();
+    }
+    
+    document.querySelectorAll(".animate").forEach(w => w.classList.remove("fadein-anim"));
+    document.querySelectorAll(".animate").forEach(w => w.classList.remove("fadeout-anim"));
+
+    const pageAnimationPromise = new Promise((res) => {
+        document.querySelectorAll(".animate").forEach(w => w.classList.add("fadein-anim"));
+        setTimeout(() => {
+            res();
+        }, 300);
+    })
+
+    return pageAnimationPromise;
 }
