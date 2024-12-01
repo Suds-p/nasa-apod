@@ -81,13 +81,15 @@ function getNASAData() {
 function loadContentOnPage(mediaContainerId, data) {
     updateNavButtonStatus();
     updateFavButtonStatus();
-    
+
     // Extract data
     const {code=200, url, title, explanation: desc} = data;
     console.log(data);
 
     if (code >= 400 || !url) {
         console.log("showing not found screen.....");
+        document.getElementById("img-content").classList.add("hide");
+        document.getElementById("vid-content").classList.add("hide");
         showNotFoundScreen();
 
         if (!desc) {
@@ -179,7 +181,7 @@ function removeFavorite() {
 // --------- Helper functions ---------
 
 function hideContentOnPage(containerId) {
-    document.getElementById(containerId).style.display = "none";
+    document.getElementById(containerId).classList.add("hide");
 }
 
 function showLoader() {
@@ -195,14 +197,10 @@ function hideLoader() {
 function showNotFoundScreen() {
     document.getElementById("not-found-wrapper").classList.remove("hide");
     document.querySelector("#not-found-wrapper img").src = "./not-found.jpg";
-    document.getElementById("img-content").classList.add("hide");
-    document.getElementById("vid-content").classList.add("hide");
 }
 
 function hideNotFoundScreen() {
     document.getElementById("not-found-wrapper").classList.add("hide");
-    document.getElementById("img-content").classList.remove("hide");
-    document.getElementById("vid-content").classList.remove("hide");
 }
 
 function getDateString(date) {
