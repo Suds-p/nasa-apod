@@ -357,6 +357,10 @@ p {
         pointer-events: all;
     }
 
+    nav:hover {
+        background: rgba(50, 43, 74, 0.533);
+    }
+
     #nav-btns input {
         width: auto;
     }
@@ -443,6 +447,7 @@ p {
 *   Animation styles   *
 ************************/
 span.ripple {
+    display: inline-block;
     position: absolute;
     border-radius: 50%;
     transform: scale(0);
