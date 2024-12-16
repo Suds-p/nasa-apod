@@ -43,13 +43,14 @@ nav {
 }
 
 nav:hover {
-    background: rgba(50, 43, 74, 0.533);
+    background: rgba(0, 0, 0, 0.533);
     transition: background 0.2s;
     cursor: pointer;
 }
 
 #nav-btns {
     display: flex;
+    gap: 20px;
     align-items: center;
     width: 100%;
     pointer-events: none;
@@ -364,6 +365,14 @@ p {
         flex: 3;
     }
 
+    #left-btn {
+        border-radius: 0 40px 40px 0;
+    }
+
+    #right-btn {
+        border-radius: 40px 0 0 40px;
+    }
+
     .wrapper {
         flex: 3;
         padding: 0;
@@ -381,14 +390,6 @@ p {
 
     #nav-btns > * {
         flex: 1;
-    }
-
-    #left-btn {
-        border-radius: 0 40px 40px 0;
-    }
-
-    #right-btn {
-        border-radius: 40px 0 0 40px;
     }
 
     nav span {
@@ -510,6 +511,14 @@ td.mc-date.mc-date--marked::after {
     clip-path: polygon(-41% 0,50% 91%, 141% 0);
     background: #f0afb4;
     aspect-ratio: 1;
+}
+
+td.mc-date.mc-date--active.mc-date--marked.mc-date--picked {
+    color: #4a1734;
+}
+
+td.mc-date.mc-date--active.mc-date--marked.mc-date--picked::after {
+    background: #f3a1a8;
 }
 
 td.mc-date.mc-date--inactive.mc-date--marked::after {
