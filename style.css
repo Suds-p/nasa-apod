@@ -5,6 +5,11 @@
     font-family: Avenir, sans-serif;
 }
 
+:root {
+    --input-bg-color: #332a56;
+    --input-border-color: #58469e;
+}
+
 /*
 * Gradient created with https://www.css-gradient.com 
 */
@@ -38,32 +43,39 @@ nav {
 }
 
 nav:hover {
-    background: #0008;
+    background: rgba(50, 43, 74, 0.533);
     transition: background 0.2s;
     cursor: pointer;
 }
 
 #nav-btns {
     display: flex;
+    align-items: center;
     width: 100%;
     pointer-events: none;
+}
+
+#nav-btns #input-wrapper {
+    flex: 2;
+    background: var(--input-bg-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: 15px;
+    padding: 10px 20px;
+}
+
+#nav-btns #input-wrapper i {
+    font-size: 1.5rem;
 }
 
 #left-btn, #right-btn {
     pointer-events: all;
     position: relative;
     overflow: hidden;
+    height: 100%;
 }
 
 #left-btn i, #left-btn span:first-of-type {
     z-index: 5;
-}
-
-#left-btn {
-    border-radius: 25px 0 0 25px;
-}
-#right-btn {
-    border-radius: 0 25px 25px 0;
 }
 
 main {
@@ -114,7 +126,7 @@ main > section {
         66%{background-size:calc(100%/3) 100%,calc(100%/3) 100%,calc(100%/3) 0%  }
 }
 
-.title-wrapper {
+#title-wrapper {
     display: flex;
     width: 100%;
     gap: 25px;
@@ -141,7 +153,7 @@ main > section {
     gap: 20px;
 }
 
-.wrapper #img-content, .media, .media-wrapper, #not-found-wrapper img {
+.wrapper #img-content, .media, #media-wrapper, #not-found-wrapper img {
     border-radius: 25px;
     width: 100%;
     max-width: 800px;
@@ -245,19 +257,25 @@ p {
     font-size: 1.5rem;
 }
 
-#current-date {
+#title-wrapper #input-wrapper {
     background: white;
+    padding: 10px 20px;
+    border-radius: 8px;
     color: black;
-    padding: 10px 25px;
+}
+
+#current-date {
+    background: transparent;
+    /* color: black; */
+    padding-left: 10px;
     font-size: 1.5rem;
     font-weight: bold;
-    border-radius: 8px;
     border: none;
     text-align: center;
     cursor: pointer;
 }
 
-.title-wrapper i {
+#title-wrapper i {
     font-size: 2rem;
 }
 
@@ -265,7 +283,7 @@ p {
     cursor: pointer;
 }
 
-.title-wrapper #unfav-btn {
+#title-wrapper #unfav-btn {
     color: red;
 }
 
@@ -323,11 +341,27 @@ p {
     .wrapper {
         padding: 25px 80px;
     }
+
+    #nav-btns input {
+        width: 50%;
+        background: transparent;
+        color: white;
+    }
 }
 
 @media all and (max-width: 900px) {
     #nav-btns {
+        background: #10082f;
         position: static;
+        pointer-events: all;
+    }
+
+    #nav-btns input {
+        width: auto;
+    }
+
+    #left-btn, #right-btn {
+        flex: 3;
     }
 
     .wrapper {
@@ -341,12 +375,28 @@ p {
 }
 
 @media all and (max-width: 760px) {
-    .title-wrapper {
+    #title-wrapper {
         flex-direction: column;
     }
 
-    #current-date {
-        width: 100%;
+    #nav-btns > * {
+        flex: 1;
+    }
+
+    #left-btn {
+        border-radius: 0 40px 40px 0;
+    }
+
+    #right-btn {
+        border-radius: 40px 0 0 40px;
+    }
+
+    nav span {
+        display: none;
+    }
+
+    nav i {
+        font-size: 2.5rem;
     }
 }
 
@@ -355,7 +405,7 @@ p {
         font-size: 3.8rem;
     }
 
-    .title-wrapper span {
+    #title-wrapper span {
         font-size: 1.4rem;
         text-wrap: nowrap;
     }
