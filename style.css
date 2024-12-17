@@ -529,3 +529,8 @@ td.mc-date.mc-date--active.mc-date--marked.mc-date--picked::after {
 td.mc-date.mc-date--inactive.mc-date--marked::after {
     background: lightgray;
 }
+
+/* Hide fav icons when year sheet is open in calendar */
+.mc-table:has(+ .mc-month-year__preview--opened) .mc-date--marked {
+    z-index: 0;
+}
