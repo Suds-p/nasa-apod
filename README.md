@@ -19,6 +19,8 @@ A simple web app made to explore NASA's repository of daily featured images/vide
 ## 🌟 About
 This project was inspired by the NASA APOD project by the 100Devs agency and created as an exercise in building web apps sans any major frontend libraries. The layout was designed mobile-first with minimal Javascript manipulation to adjust the elements for desktop viewports. All animations and actions were written in vanilla HTML/CSS/JS. 
 
+Users can save favorite images by tapping the heart icon. These are currently stored using the LocalStorage API for persistence across browser sessions. To rearrange the layout for mobile vs. desktop viewports, the Javascript sets up an event listener for 'resize' events and moves around components as necessary.
+
 ## 🚩 Demo
 The project is hosted live at: https://suds-apod.netlify.app/
 
@@ -32,3 +34,7 @@ The project is hosted live at: https://suds-apod.netlify.app/
 - Support for keyboard navigation
 - Support for mobile gestures
 - Tapping image to open in full-sized modal for better viewing experience.
+
+## 💎 Acknowledgments
+- Calendar icon from <a href="https://www.flaticon.com/free-icons/calendar" title="calendar icons">Freepik - Flaticon</a>
+- Date picker by [MCDatePicker](https://mcdatepicker.netlify.app/)
