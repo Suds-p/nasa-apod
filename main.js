@@ -177,7 +177,7 @@ function removeFavorite() {
     let favDates = currentFavs.split(', ');
     let favIndex = favDates.indexOf(currentDate);
     if (favIndex !== -1) {
-        favIndex === 0 ? favDates.shift() : favDates.splice(favIndex, favIndex);
+        favIndex === 0 ? favDates.shift() : favDates.splice(favIndex, 1);
         currentFavs = favDates.join(', ');
         localStorage.setItem(FAV_DATES, currentFavs);
     }
