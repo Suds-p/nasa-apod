@@ -62,6 +62,15 @@ datePicker.markDatesCustom(date => {
 
 getNASAData();
 
+const imgContainer = document.getElementById('img-content');
+const lightbox = document.querySelector('.lightbox');
+const lightboxImg = lightbox.querySelector('img');
+const closeButton = lightbox.querySelector('.close-button');
+const loadingSpinner = lightbox.querySelector('.loading-spinner');
+imgContainer.onclick = openLightbox;
+closeButton.onclick = closeLightbox;
+lightbox.onclick = closeLightbox;
+
 function getNASAData() {
     console.log(currentDate);
     return fetch(`/.netlify/functions/getNasaData?date=${currentDate}`)
@@ -183,6 +192,34 @@ function removeFavorite() {
     }
     updateFavButtonStatus();
 }
+
+function openLightbox() {
+    lightboxImg.style.display = 'none';
+
+    lightboxImg.src = imgContainer.src;
+    lightbox.classList.add('active');
+    loadingSpinner.style.display = 'block';
+    closeButton.style.display = 'block';
+
+    lightboxImg.onload = () => {
+        loadingSpinner.style.display = 'none';
+        lightboxImg.style.display = 'block';
+    }
+}
+
+function closeLightbox(event) {
+    if (event.target === lightbox || event.target === closeButton) {
+        lightbox.classList.remove('active');
+        closeButton.style.display = 'none';
+    }
+}
+
+// Handle escape key to close lightbox
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && lightbox.style.display === 'block') {
+        closeLightbox(event);
+    }
+});
 
 // --------- Helper functions ---------
 
