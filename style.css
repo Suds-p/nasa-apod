@@ -163,6 +163,10 @@ main > section {
     border: 3px solid white;
 }
 
+#img-content {
+    cursor: pointer;
+}
+
 
 #vid-content {
     aspect-ratio: 16/9;
@@ -302,7 +306,7 @@ p {
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
-    transition: opacity .2s ease 0s, visibility .5s ease 200ms;
+    transition: opacity .5s ease 0s, visibility 0s ease 500ms;
 }
 
 .lightbox img {
@@ -321,7 +325,7 @@ p {
 .lightbox.active {
     opacity: 1;
     visibility: visible;
-    transition: visibility .2s ease 0s, opacity .5s ease 200ms;
+    transition: visibility 0s ease 0s, opacity .5s ease 0s;
 }
 
 .lightbox.active img {
