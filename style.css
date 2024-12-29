@@ -8,6 +8,7 @@
 :root {
     --input-bg-color: #332a56;
     --input-border-color: #58469e;
+    --footer-bg-color: #080416;
 }
 
 /*
@@ -211,10 +212,51 @@ footer {
     flex-basis: 40px;
     z-index: 20;
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 15px 0;
-    background: #080416;
+    background: var(--footer-bg-color);
+}
+
+footer span.copy {
+    margin: 0 auto; /* Center copy text without flexbox */
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 20px 0 5px;
+    border-radius: 20px 0 0 20px;
+    height: 100%;
+    background: var(--footer-bg-color);
+    z-index: 2;
+}
+
+.github-link i {
+    font-size: 2.7rem;
+    color: white;
+}
+
+.hover-text {
+    position: absolute;
+    white-space: nowrap;
+    text-decoration: none;
+    right: 0;
+    transform: translateX(100%);
+    transition: 
+        transform 0.5s ease-in-out, 
+        background 0.5s ease-out;
+    z-index: 1; /* Keep text beneath the icon */
+    padding: 5px 20px;
+    border-radius: 20px;
+    font-size: 1.2rem;
+}
+
+.hover-text:has(+ .github-link:hover) {
+    transform: translateX(-50%);
+    color: black;
+    background: white;
 }
 
 .hide {
